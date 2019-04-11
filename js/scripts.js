@@ -5,18 +5,26 @@ $('.search-container').html(`
     </form>
 `);
 
-$('#gallery').html(`
-    <div class="card">
-        <div class="card-img-container">
-            <img class="card-img" src="https://placehold.it/90x90" alt="profile picture">
-        </div>
-        <div class="card-info-container">
-            <h3 id="name" class="card-name cap">first last</h3>
-            <p class="card-text">email</p>
-            <p class="card-text cap">city, state</p>
-        </div>
-    </div>
-`);
+let htmlHolder = '';
+const html =   
+            `
+                <div class="card">
+                    <div class="card-img-container">
+                        <img class="card-img" src="https://placehold.it/90x90" alt="profile picture">
+                    </div>
+                    <div class="card-info-container">
+                        <h3 id="name" class="card-name cap">first last</h3>
+                        <p class="card-text">email</p>
+                        <p class="card-text cap">city, state</p>
+                    </div>
+                </div>
+            `
+
+for(let i = 0; i < 12; i++){
+    htmlHolder += html;
+}
+
+$('#gallery').html(htmlHolder);
 
 $("body").append("<div class='modal-large-container'>Appended text</div>");
 $(".modal-large-container").hide();
