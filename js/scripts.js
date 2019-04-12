@@ -34,11 +34,11 @@ console.log(data.results[0].picture.large);
     $('#gallery').html(html);
 }
 
+$("body").append("<div class='modal-large-container'>Appended text</div>");
+// $(".modal-large-container").hide();
 
-$("body").append("<div class='modal-container'>Appended text</div>");
-$(".modal-container").hide();
-
-$('.modal-container').html(`
+$('.modal-large-container').html(`
+    <div class="modal-container">
         <div class="modal">
             <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
             <div class="modal-info-container">
@@ -57,14 +57,15 @@ $('.modal-container').html(`
             <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
             <button type="button" id="modal-next" class="modal-next btn">Next</button>
         </div>
+    </div>
 `);
 
 $("#modal-close-btn").click(function(){
-    $(".modal-container").hide();
+    $(".modal-large-container").hide();
 });
 
 $(".card").click(function(){
-    $(".modal-container").show();
+    $(".modal-large-container").show();
 });
 
 hiddenElements = $(':hidden');
@@ -80,9 +81,9 @@ $(".modal-btn-container").click(function(){
     i = true;
 });
 
-$(".modal-container").click(function(){
+$(".modal-large-container").click(function(){
     if(i === false) {
-        $(".modal-container").hide();
+        $(".modal-large-container").hide();
     }
     i = false;
 });
