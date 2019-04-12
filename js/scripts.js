@@ -40,19 +40,25 @@ function generateData(data) {
 function addModal(data, index) {
     $("body").append("<div class='modal-large-container'>Appended text</div>");
 
+    const rawBirthday = /^(\d{4})-(\d{2})-(\d{2})(.+)$/;
+    const formating = '$2/$3/$1';
+    const dob = data.results[index].dob.date;
+
+    const birthday = dob.replace(rawBirthday, formating);
+
     $('.modal-large-container').html(`
         <div class="modal-container">
             <div class="modal">
                 <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
                 <div class="modal-info-container">
                     <img class="modal-img" src="${data.results[index].picture.large}" alt="profile picture">
-                    <h3 id="name" class="modal-name cap">name</h3>
-                    <p class="modal-text">email</p>
-                    <p class="modal-text cap">city</p>
+                    <h3 id="name" class="modal-name cap">${data.results[index].name.first} ${data.results[index].name.last}</h3>
+                    <p class="modal-text">${data.results[index].email}</p>
+                    <p class="modal-text cap">${data.results[index].location.city}</p>
                     <hr>
-                    <p class="modal-text">(555) 555-5555</p>
-                    <p class="modal-text">123 Portland Ave., Portland, OR 97204</p>
-                    <p class="modal-text">Birthday: 10/21/2015</p>
+                    <p class="modal-text">${data.results[index].cell}</p>
+                    <p class="modal-text">${data.results[index].location.street}, ${data.results[index].location.city}, ${data.results[index].location.state} ${data.results[index].location.postcode}</p>
+                    <p class="modal-text">Birthday: ${birthday}</p>
                 </div>
             </div>
 
