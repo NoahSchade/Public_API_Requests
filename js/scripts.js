@@ -23,9 +23,9 @@ console.log(data.results[0].picture.large);
                             <img class="card-img" src="${data.results[i].picture.large}" alt="profile picture">
                         </div>
                         <div class="card-info-container">
-                            <h3 id="name" class="card-name cap">first last</h3>
-                            <p class="card-text">email</p>
-                            <p class="card-text cap">city, state</p>
+                            <h3 id="name" class="card-name cap">${data.results[i].name.first} ${data.results[i].name.last}last</h3>
+                            <p class="card-text">${data.results[i].email}</p>
+                            <p class="card-text cap">${data.results[i].location.city}, ${data.results[i].location.state}</p>
                         </div>
                     </div>
                 `;
@@ -35,16 +35,10 @@ console.log(data.results[0].picture.large);
 }
 
 
+$("body").append("<div class='modal-container'>Appended text</div>");
+$(".modal-container").hide();
 
-
-
-
-
-$("body").append("<div class='modal-large-container'>Appended text</div>");
-$(".modal-large-container").hide();
-
-$('.modal-large-container').html(`
-    <div class="modal-container">
+$('.modal-container').html(`
         <div class="modal">
             <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
             <div class="modal-info-container">
@@ -63,15 +57,14 @@ $('.modal-large-container').html(`
             <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
             <button type="button" id="modal-next" class="modal-next btn">Next</button>
         </div>
-    </div>
 `);
 
 $("#modal-close-btn").click(function(){
-    $(".modal-large-container").hide();
+    $(".modal-container").hide();
 });
 
 $(".card").click(function(){
-    $(".modal-large-container").show();
+    $(".modal-container").show();
 });
 
 hiddenElements = $(':hidden');
@@ -87,9 +80,9 @@ $(".modal-btn-container").click(function(){
     i = true;
 });
 
-$(".modal-large-container").click(function(){
+$(".modal-container").click(function(){
     if(i === false) {
-        $(".modal-large-container").hide();
+        $(".modal-container").hide();
     }
     i = false;
 });
