@@ -57,7 +57,7 @@ function addModal(data, index) {
                     <p class="modal-text cap">${data.results[index].location.city}</p>
                     <hr>
                     <p class="modal-text">${data.results[index].cell}</p>
-                    <p class="modal-text">${data.results[index].location.street}, ${data.results[index].location.city}, ${data.results[index].location.state} ${data.results[index].location.postcode}</p>
+                    <p class="modal-text cap">${data.results[index].location.street}, ${data.results[index].location.state} ${data.results[index].location.postcode}</p>
                     <p class="modal-text">Birthday: ${birthday}</p>
                 </div>
             </div>
