@@ -8,14 +8,11 @@ $('.search-container').html(`
 fetch('https://randomuser.me/api/?results=12')
     .then(response => response.json())
     .then(data => generateData(data))
-    .then(() => addModal())
 
 let html = '';
 let htmlHolder = '';
 
 function generateData(data) {
-    
-console.log(data.results[0].picture.large);
 
     for(let i = 0; i < 12; i++) {
         html +=  `
@@ -24,7 +21,7 @@ console.log(data.results[0].picture.large);
                             <img class="card-img" src="${data.results[i].picture.large}" alt="profile picture">
                         </div>
                         <div class="card-info-container">
-                            <h3 id="name" class="card-name cap">${data.results[i].name.first} ${data.results[i].name.last}last</h3>
+                            <h3 id="name" class="card-name cap">${data.results[i].name.first} ${data.results[i].name.last}</h3>
                             <p class="card-text">${data.results[i].email}</p>
                             <p class="card-text cap">${data.results[i].location.city}, ${data.results[i].location.state}</p>
                         </div>
@@ -33,11 +30,15 @@ console.log(data.results[0].picture.large);
     }
 
     $('#gallery').html(html);
+
+    $(".card").click(function(){
+        addModal();
+        // console.log($(this).index());
+    });
 }
 
 function addModal() {
-    $("body").append("<div class='modal-large-container'>Appended text</div>");
-    $(".modal-large-container").hide();
+    $("body").append("<div class='modal-large-container'>Appended text</div>");;
 
     $('.modal-large-container').html(`
         <div class="modal-container">
@@ -63,15 +64,8 @@ function addModal() {
     `);
 
     $("#modal-close-btn").click(function(){
-        $(".modal-large-container").hide();
+        $(".modal-large-container").remove();
     });
-
-    $(".card").click(function(){
-        $(".modal-large-container").show();
-    });
-
-    hiddenElements = $(':hidden');
-    visibleElements = $(':visible');
 
     let i = false
 
@@ -85,7 +79,7 @@ function addModal() {
 
     $(".modal-large-container").click(function(){
         if(i === false) {
-            $(".modal-large-container").hide();
+            $(".modal-large-container").remove();
         }
         i = false;
     });
