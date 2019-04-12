@@ -5,26 +5,40 @@ $('.search-container').html(`
     </form>
 `);
 
-let htmlHolder = '';
-const html =   
-            `
-                <div class="card">
-                    <div class="card-img-container">
-                        <img class="card-img" src="https://placehold.it/90x90" alt="profile picture">
-                    </div>
-                    <div class="card-info-container">
-                        <h3 id="name" class="card-name cap">first last</h3>
-                        <p class="card-text">email</p>
-                        <p class="card-text cap">city, state</p>
-                    </div>
-                </div>
-            `
+fetch('https://randomuser.me/api/?results=12')
+    .then(response => response.json())
+    .then(data => generateImage(data))
 
-for(let i = 0; i < 12; i++){
-    htmlHolder += html;
+let html = '';
+let htmlHolder = '';
+
+function generateImage(data) {
+    
+console.log(data.results[0].picture.large);
+
+    for(let i = 0; i < 12; i++) {
+        html +=  `
+                    <div class="card">
+                        <div class="card-img-container">
+                            <img class="card-img" src="${data.results[i].picture.large}" alt="profile picture">
+                        </div>
+                        <div class="card-info-container">
+                            <h3 id="name" class="card-name cap">first last</h3>
+                            <p class="card-text">email</p>
+                            <p class="card-text cap">city, state</p>
+                        </div>
+                    </div>
+                `;
+    }
+
+    $('#gallery').html(html);
 }
 
-$('#gallery').html(htmlHolder);
+
+
+
+
+
 
 $("body").append("<div class='modal-large-container'>Appended text</div>");
 $(".modal-large-container").hide();
@@ -79,16 +93,3 @@ $(".modal-large-container").click(function(){
     }
     i = false;
 });
-
-
-
-
-$.ajax({
-    url: 'https://randomuser.me/api/',
-    dataType: 'json',
-    success: function(data) {
-      console.log(data);
-    }
-  });
-
-  
