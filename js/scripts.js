@@ -11,6 +11,10 @@ fetch('https://randomuser.me/api/?results=12&nat=us')
 
 let html = '';
 let htmlHolder = '';
+let saveIndex;
+let saveData;
+let modalCounter = 0;
+
 
 function generateData(data) {
 
@@ -33,6 +37,8 @@ function generateData(data) {
 
     $(".card").click(function(){
         const index = $(this).index();
+        saveIndex = index;
+        saveData = data;
         addModal(data, index);
     });
 }
@@ -78,6 +84,7 @@ function addModal(data, index) {
     `);
 
     $("#modal-close-btn").click(function(){
+        modalCounter = 0;
         $(".modal-large-container").remove();
     });
 
@@ -93,11 +100,18 @@ function addModal(data, index) {
 
     $(".modal-large-container").click(function(){
         if(i === false) {
+            modalCounter = 0;
             $(".modal-large-container").remove();
         }
         i = false;
     });
 
+
+    $("#modal-prev").click(function(){
+        modalCounter -= 1;
+        $(".modal-large-container").remove();
+        addModal(saveData, saveIndex + modalCounter);
+    })
 }
 
 $("#search-submit").click(function(){
