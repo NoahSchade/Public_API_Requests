@@ -1,7 +1,7 @@
 $('.search-container').html(`
     <form action="#" method="get">
     <input type="search" id="search-input" class="search-input" placeholder="Search...">
-    <input type="submit" value="&#x1F50D;" id="serach-submit" class="search-submit">
+    <input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
     </form>
 `);
 
@@ -99,3 +99,17 @@ function addModal(data, index) {
     });
 
 }
+
+$("#search-submit").click(function(){
+    const enteredInput = $("#search-input").val().toLowerCase();
+    let cardName;
+
+    for (let i = 0; i < $(".card").length; i++) {
+        
+        cardName = $(`.card:eq(${i}) .card-name`).text().toLowerCase();
+
+        if(enteredInput === cardName){
+            $(`.card:eq(${i})`).css("background-color", "yellow");
+        }
+    }
+});
