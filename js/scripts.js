@@ -103,13 +103,16 @@ function addModal(data, index) {
 $("#search-submit").click(function(){
     const enteredInput = $("#search-input").val().toLowerCase();
     let cardName;
+    let regex = new RegExp("^" + enteredInput + ".*");
+
+    $(".card").hide();
 
     for (let i = 0; i < $(".card").length; i++) {
         
         cardName = $(`.card:eq(${i}) .card-name`).text().toLowerCase();
 
-        if(enteredInput === cardName){
-            $(`.card:eq(${i})`).css("background-color", "yellow");
+        if(cardName.match(regex)){
+            $(`.card:eq(${i})`).show();
         }
     }
 });
