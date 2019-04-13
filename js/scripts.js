@@ -11,9 +11,6 @@ fetch('https://randomuser.me/api/?results=12&nat=us')
 
 let html = '';
 let htmlHolder = '';
-let saveIndex;
-let saveData;
-let modalCounter = 0;
 
 
 function generateData(data) {
@@ -37,8 +34,6 @@ function generateData(data) {
 
     $(".card").click(function(){
         const index = $(this).index();
-        saveIndex = index;
-        saveData = data;
         addModal(data, index);
     });
 }
@@ -84,7 +79,6 @@ function addModal(data, index) {
     `);
 
     $("#modal-close-btn").click(function(){
-        modalCounter = 0;
         $(".modal-large-container").remove();
     });
 
@@ -100,17 +94,23 @@ function addModal(data, index) {
 
     $(".modal-large-container").click(function(){
         if(i === false) {
-            modalCounter = 0;
             $(".modal-large-container").remove();
         }
         i = false;
     });
 
-
+    if(index === 0){
+        $("#modal-prev").remove();
+    }
     $("#modal-prev").click(function(){
-        modalCounter -= 1;
-        $(".modal-large-container").remove();
-        addModal(saveData, saveIndex + modalCounter);
+        if(index !== 0){
+            $(".modal-large-container").remove();
+            addModal(data, index - 1);
+            console.log(index);
+            if(index === 1) {
+                $("#modal-prev").remove();
+            }
+        } 
     })
 }
 
