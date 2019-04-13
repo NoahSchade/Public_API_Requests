@@ -5,7 +5,7 @@ $('.search-container').html(`
     </form>
 `);
 
-fetch('https://randomuser.me/api/?results=12')
+fetch('https://randomuser.me/api/?results=12&nat=us')
     .then(response => response.json())
     .then(data => generateData(data))
 
@@ -41,10 +41,18 @@ function addModal(data, index) {
     $("body").append("<div class='modal-large-container'>Appended text</div>");
 
     const rawBirthday = /^(\d{4})-(\d{2})-(\d{2})(.+)$/;
-    const formating = '$2/$3/$1';
+    const formatedBirthday = '$2/$3/$1';
     const dob = data.results[index].dob.date;
 
-    const birthday = dob.replace(rawBirthday, formating);
+    const birthday = dob.replace(rawBirthday, formatedBirthday);
+
+
+    const rawCellNumber = /^(\(\d{3}\))-(\d{3})-(\d{4})$/;
+    const formatedCellNumber = '$1 $2-$3';
+    const cell = data.results[index].cell;
+
+    const cellNumber = cell.replace(rawCellNumber, formatedCellNumber);
+
 
     $('.modal-large-container').html(`
         <div class="modal-container">
@@ -56,7 +64,7 @@ function addModal(data, index) {
                     <p class="modal-text">${data.results[index].email}</p>
                     <p class="modal-text cap">${data.results[index].location.city}</p>
                     <hr>
-                    <p class="modal-text">${data.results[index].cell}</p>
+                    <p class="modal-text">${cellNumber}</p>
                     <p class="modal-text cap">${data.results[index].location.street}, ${data.results[index].location.state} ${data.results[index].location.postcode}</p>
                     <p class="modal-text">Birthday: ${birthday}</p>
                 </div>
