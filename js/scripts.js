@@ -106,9 +106,21 @@ function addModal(data, index) {
         if(index !== 0){
             $(".modal-large-container").remove();
             addModal(data, index - 1);
-            console.log(index);
             if(index === 1) {
                 $("#modal-prev").remove();
+            }
+        } 
+    })
+
+    if(index === $(".card").length - 1){
+        $("#modal-next").remove();
+    }
+    $("#modal-next").click(function(){
+        if(index !== $(".card").length - 1){
+            $(".modal-large-container").remove();
+            addModal(data, index + 1);
+            if(index === $(".card").length - 2) {
+                $("#modal-next").remove();
             }
         } 
     })
