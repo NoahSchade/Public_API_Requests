@@ -36,6 +36,8 @@ function generateData(data) {
         const index = $(this).index();
         addModal(data, index);
     });
+
+    $(".card").css("background-color", "#bdc3c7");
 }
 
 function addModal(data, index) {
@@ -142,3 +144,6 @@ $("#search-submit").click(function(){
         }
     }
 });
+
+$("body").css("background-color", "#2c3e50");
+$("h1").css("color", "#bdc3c7");
