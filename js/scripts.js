@@ -1,3 +1,4 @@
+// Create search bar
 $('.search-container').html(`
     <form action="#" method="get">
     <input type="search" id="search-input" class="search-input" placeholder="Search...">
@@ -5,6 +6,7 @@ $('.search-container').html(`
     </form>
 `);
 
+// Get data
 fetch('https://randomuser.me/api/?results=12&nat=us')
     .then(response => response.json())
     .then(data => generateData(data))
@@ -12,7 +14,7 @@ fetch('https://randomuser.me/api/?results=12&nat=us')
 let html = '';
 let htmlHolder = '';
 
-
+// Create cards
 function generateData(data) {
 
     for(let i = 0; i < 12; i++) {
@@ -40,6 +42,7 @@ function generateData(data) {
     $(".card").css("background-color", "#bdc3c7");
 }
 
+// Create modal when card is clicked
 function addModal(data, index) {
     $("body").append("<div class='modal-large-container'>Appended text</div>");
 
@@ -128,6 +131,7 @@ function addModal(data, index) {
     })
 }
 
+// Add functionality to search bar
 $("#search-submit").click(function(){
     const enteredInput = $("#search-input").val().toLowerCase();
     let cardName;
@@ -145,5 +149,6 @@ $("#search-submit").click(function(){
     }
 });
 
+// Add styles
 $("body").css("background-color", "#2c3e50");
 $("h1").css("color", "#bdc3c7");
